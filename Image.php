@@ -29,7 +29,7 @@ class Image extends Module
      
         $this->manager = new ImageManager($config);
         // module details
-        $this->setServiceName('image');  
+        $this->setServiceName('image');
         $this->setBootable(false);
     }
 
