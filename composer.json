@@ -1,0 +1,23 @@
+{
+    "name": "arikaim/image-module",
+    "description": "Arikam Image Module",
+    "keywords": ["Module", "Arikaim Image module"],
+    "type": "arikaim-module",
+    "license": "GPL-3.0-or-later",
+    "authors": [{
+        "name": "Konstantin Atanasov",
+        "email": "info@arikaim.com",
+        "homepage": "http://arikaim.com"
+    }],
+    "require": {
+        "php": ">=5.6.0",
+        "arikaim/installer": "*" ,
+        "intervention/image": "^1.0"      
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "path": "image"
+    }
+}

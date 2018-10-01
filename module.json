@@ -1,0 +1,15 @@
+{
+    "title": "Image",
+    "description": "Image handling and manipulation.",
+    "version": "1.0",
+    "requires": [
+        "intervention/image"
+    ],
+    "help": {
+        "url": "http://image.intervention.io/"
+    },
+    "facade": {
+        "class": "Arikaim\\Modules\\Image\\Facade\\Image",
+        "alias": "Image"
+    }
+}
