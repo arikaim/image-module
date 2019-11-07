@@ -3,21 +3,34 @@
  * Arikaim
  *
  * @link        http://www.arikaim.com
- * @copyright   Copyright (c) 2017-2018 Konstantin Atanasov <info@arikaim.com>
- * @license     http://www.arikaim.com/license.html
+ * @copyright   Copyright (c) 2017-2019 Konstantin Atanasov <info@arikaim.com>
+ * @license     http://www.arikaim.com/license
  * 
 */
 namespace Arikaim\Modules\Image\Facade;
 
 use Arikaim\Core\Utils\StaticFacade;
 
+/**
+ * Image facade class
+ */
 class Image extends StaticFacade
 {
+    /**
+     * Class name
+     *
+     * @return string
+     */
     public static function getInstanceClass()
     {
         return 'Arikaim\\Modules\\Image\\Image';
     }
 
+    /**
+     * Container item name
+     *
+     * @return string
+     */
     public static function getContainerItemName()
     {
         return 'image';

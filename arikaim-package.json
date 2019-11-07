@@ -1,7 +1,9 @@
 {
     "title": "Image",
+    "name": "image",
+    "package-type": "module",
     "description": "Image handling and manipulation.",
-    "version": "1.0",
+    "version": "1.0.2",
     "requires": [
         "intervention/image"
     ],
@@ -11,5 +13,6 @@
     "facade": {
         "class": "Arikaim\\Modules\\Image\\Facade\\Image",
         "alias": "Image"
-    }
+    },
+    "disabled": false
 }
