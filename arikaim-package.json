@@ -3,7 +3,7 @@
     "name": "image",
     "package-type": "module",
     "description": "Image handling and manipulation.",
-    "version": "1.0.2",
+    "version": "1.0.4",
     "requires": [
         "intervention/image"
     ],
