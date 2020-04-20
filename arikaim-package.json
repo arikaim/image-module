@@ -4,6 +4,7 @@
     "package-type": "module",
     "description": "Image handling and manipulation.",
     "version": "1.0.5",
+    "repository": "https://github.com/arikaim/image-module.git",
     "require": {
         "composer": [
             "intervention/image"
