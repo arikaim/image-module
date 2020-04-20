@@ -32,10 +32,20 @@ class Image extends Module
      */
     public function __construct()
     {
-        // module details
-        $this->setServiceName('image');
-        $this->manager = (class_exists('ImageManager') == true) ? new ImageManager(['driver' => 'gd']) : null;
+        // create image manager  
+        $this->manager = $this->createImageManager();
     }
+
+    /**
+     * Create image manager instance
+     *
+     * @param string $driver
+     * @return ImageManager|null
+     */
+    public function createImageManager($driver = 'gd') 
+    {
+        return (class_exists('ImageManager') == true) ? new ImageManager(['driver' => $driver]) : null;
+    } 
 
     /**
      * Call ImageManager method

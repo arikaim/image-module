@@ -11,9 +11,8 @@ Arikaim CMS Image module
   * [Arikaim CMS](https://github.com/arikaim/arikaim)
 
 
-#### Install
+#### Installation
+
 ```bash
-
 composer require arikaim/image-module
-
 ```
