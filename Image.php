@@ -11,15 +11,16 @@ namespace Arikaim\Modules\Image;
 
 use Intervention\Image\ImageManager;
 
-use Arikaim\Core\Utils\Utils;
 use Arikaim\Core\Extension\Module;
-use Arikaim\Modules\Image\Facade\Image as ImageFacade;
 
 /**
  * Image class
  */
 class Image extends Module
 {
+    const IMAGICK_DRIVER = 'imagick';
+    const GD_DRIVER      = 'gd';
+
     /**
      * Image menagaer class
      *
@@ -28,9 +29,19 @@ class Image extends Module
     private $manager;
 
     /**
-     * Constructor
+     * Install module
+     *
+     * @return void
      */
-    public function __construct()
+    public function install()
+    {
+        $this->registerService('Image');
+    }
+
+    /**
+     * Boot
+     */
+    public function boot()
     {
         // create image manager  
         $this->manager = $this->createImageManager();
@@ -42,21 +53,27 @@ class Image extends Module
      * @param string $driver
      * @return ImageManager|null
      */
-    public function createImageManager($driver = 'gd') 
+    public function createImageManager($driver = Self::GD_DRIVER) 
     {
-        return (class_exists('ImageManager') == true) ? new ImageManager(['driver' => $driver]) : null;
+        return new ImageManager(['driver' => $driver]);
     } 
 
     /**
-     * Call ImageManager method
+     * Get drivers list
      *
-     * @param string $method
-     * @param array $args
-     * @return mixed
+     * @return array
      */
-    public function __call($method, $args) 
+    public function getDrivers()
     {
-        return Utils::call($this->manager,$method,$args);       
+        $result = [];
+        if (\extension_loaded('gd') == true) {
+            $result[] = Self::GD_DRIVER;
+        }
+        if (\extension_loaded('imagick') == true) {
+            $result[] = Self::IMAGICK_DRIVER;
+        }
+
+        return $result;
     }
 
     /**
@@ -64,7 +81,7 @@ class Image extends Module
      *
      * @return ImageManager
      */
-    public function getManager()
+    public function getInstance()
     {
         return $this->manager;
     }
@@ -78,11 +95,12 @@ class Image extends Module
     {
         $image_data = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgaAQAAIQAghhgRykAAAAASUVORK5CYII=";
         try {
-            $image = ImageFacade::make($image_data);
+            $image = $this->manager->make($image_data);
         } catch(\Exception $e) {
             $this->error = $e->getMessage();         
             return false;
         }
+
         return true;
     }
 }
