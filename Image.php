@@ -10,7 +10,6 @@
 namespace Arikaim\Modules\Image;
 
 use Intervention\Image\ImageManager;
-
 use Arikaim\Core\Extension\Module;
 
 /**
