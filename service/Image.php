@@ -14,6 +14,7 @@ use Intervention\Image\ImageManager;
 use Arikaim\Core\System\Error\Traits\TaskErrors;
 use Arikaim\Core\Utils\File;
 
+use Arikaim\Modules\Image\Classes\GdImageFilter;
 use Arikaim\Core\Service\Service;
 use Arikaim\Core\Service\ServiceInterface;
 use Exception;
@@ -50,6 +51,18 @@ class Image extends Service implements ServiceInterface
     public function manager() 
     {
         return $this->manager;
+    }
+
+    /**
+     * Oacity filter
+     *
+     * @param \GdImage|resource $image
+     * @param float $opacity
+     * @return \GdImage|resource
+     */
+    public function opacity($image, float $opacity = 0.5)
+    {
+        return GdImageFilter::opacity($image,$opacity);
     }
 
     /**

@@ -17,6 +17,13 @@ class Color
     const BLACK = [0,0,0];
     const WHITE = [255,255,255];
 
+    /**
+     * Convert hex color to RGB
+     *
+     * @param string|null $color
+     * @param array $default
+     * @return array
+     */
     public static function hexToRgb(?string $color, array $default = Self::BLACK): array
     {
         if (empty($color) == true) {
