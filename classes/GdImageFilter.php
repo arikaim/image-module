@@ -25,8 +25,11 @@ class GdImageFilter
     {       
         \imagealphablending($image,false); 
         \imagesavealpha($image,true); 
-        $transparency = 1 - $opacity;
-        \imagefilter($image,IMG_FILTER_COLORIZE,0,0,0,(127 * $transparency)); 
+      
+        $transparency = (1.00 - $opacity);
+        $transparency = (int)(127.00 * $transparency);
+
+        \imagefilter($image,IMG_FILTER_COLORIZE,0,0,0,$transparency);
         
         return $image;
     }
