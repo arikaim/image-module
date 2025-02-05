@@ -70,7 +70,6 @@ class Image extends Service implements ServiceInterface
      */
     public function make($source)
     {
-        $this->clearErrors();
         try {
             $image = $this->manager->make($source);
         } catch (Exception $e) {        
