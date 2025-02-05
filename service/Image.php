@@ -11,7 +11,6 @@ namespace Arikaim\Modules\Image\Service;
 
 use Intervention\Image\ImageManager;
 
-use Arikaim\Core\System\Error\Traits\TaskErrors;
 use Arikaim\Core\Utils\File;
 
 use Arikaim\Modules\Image\Classes\GdImageFilter;
@@ -25,8 +24,6 @@ use Closure;
 */
 class Image extends Service implements ServiceInterface
 {
-    use TaskErrors;
-
     /**
      * Image menagaer class
      *
@@ -34,10 +31,10 @@ class Image extends Service implements ServiceInterface
      */
     private $manager;
 
-    /**
-     * Constructor
+     /**
+     * Init service
      */
-    public function __construct()
+    public function boot()
     {
         $this->setServiceName('image');
         $this->manager = new ImageManager(['driver' => 'gd']);
@@ -76,8 +73,7 @@ class Image extends Service implements ServiceInterface
         $this->clearErrors();
         try {
             $image = $this->manager->make($source);
-        } catch (Exception $e) {
-            $this->addError($e->getMessage());
+        } catch (Exception $e) {        
             return null;
         }
 
@@ -96,14 +92,12 @@ class Image extends Service implements ServiceInterface
     {
         if (File::exists($path) == false) {
             throw new Exception('Destination folder not exist');
-            return false;
         }
         if (File::isWritable($path) == false) {
             File::setWritable($path);
         }
         if (File::isWritable($path) == false) {
             throw new Exception('Destination folder not writable!');
-            return false;
         }
         
         return (bool)$image->save($path . $fileName);
@@ -113,26 +107,20 @@ class Image extends Service implements ServiceInterface
      * Resize image
      *
      * @param mixed $source
-     * @param integer $width
-     * @param integer $height
+     * @param integer|null $width
+     * @param integer|null $height
      * @param Closure|null $callback
      * @return mixed
      */
-    public function resize($source, int $width, int $height, ?Closure $callback = null)
+    public function resize($source, ?int $width, ?int $height, ?Closure $callback = null)
     {
         $image = $this->make($source);
-        if (\is_null($image) == true) {
+        if ($image == null) {
             return null;
         }
-        $image->resize($width,$height);
-        if (empty($callback) == false) {
-            $process = function($image,$callback) {
-                $callback($image);
-                return $image;
-            };
-            $image = $process($image,$callback);
-        }
 
+        $image->resize($width,$height,$callback);
+        
         return $image;
     }
 
@@ -145,7 +133,7 @@ class Image extends Service implements ServiceInterface
     public function getSize($source): ?array
     {       
         $image = $this->make($source);
-        if (\is_null($image) == true) {
+        if ($image == null) {
             return null;
         }
        

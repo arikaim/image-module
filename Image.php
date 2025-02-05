@@ -92,9 +92,9 @@ class Image extends Module
      */
     public function test()
     {
-        $image_data = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgaAQAAIQAghhgRykAAAAASUVORK5CYII=";
+        $imageData = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgaAQAAIQAghhgRykAAAAASUVORK5CYII=";
         try {
-            $image = $this->manager->make($image_data);
+            $this->manager->make($imageData);
         } catch(\Exception $e) {
             $this->error = $e->getMessage();         
             return false;
